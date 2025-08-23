@@ -66,6 +66,12 @@
 		transform: scale(1.05);
 		box-shadow: 0 0 20px rgba(0, 176, 240, 0.7);
 	}
+	@media (max-width: 800px) {
+		.caratula {
+			width: 100%;
+			padding: 10px 0;
+		}
+	}
 </style>
 <body>
 	<section class="caratula">
@@ -73,7 +79,7 @@
 		<h3>CARRERA DE INFORMATICA</h3>
 		<h2>PROGRAMACION WEB III</h2>
 		<h2>INF-133</h2>
-		<div id="imagen"> </div>
+		<div id="logo"> </div>
 		<h2>TAREA NRO 2</h2>
 		<h2>EJERCICIO: PRACTICA 1 CONSUMIR API</h2>
 		<p>Estudiantes:</p>
@@ -101,7 +107,7 @@
 
 </body>
 <script type="text/javascript">
-	document.getElementById("imagen").innerHTML=`<img src="http://informatica.umsa.bo/static/img/logo_ingo.png">`;
+	document.getElementById("logo").innerHTML=`<img src="http://informatica.umsa.bo/static/img/logo_ingo.png">`;
 
 	const lista = document.querySelector("#lista");
 	let URL = "https://dummyjson.com/products";

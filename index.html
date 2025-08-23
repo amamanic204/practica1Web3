@@ -73,7 +73,7 @@
 		<h3>CARRERA DE INFORMATICA</h3>
 		<h2>PROGRAMACION WEB III</h2>
 		<h2>INF-133</h2>
-		<img src="http://informatica.umsa.bo/static/img/logo_ingo.png">
+		<div id="imagen"> </div>
 		<h2>TAREA NRO 2</h2>
 		<h2>EJERCICIO: PRACTICA 1 CONSUMIR API</h2>
 		<p>Estudiantes:</p>
@@ -101,9 +101,11 @@
 
 </body>
 <script type="text/javascript">
+	document.getElementById("imagen").innerHTML=`<img src="http://informatica.umsa.bo/static/img/logo_ingo.png">`;
+
 	const lista = document.querySelector("#lista");
 	let URL = "https://dummyjson.com/products";
-
+	
 	for (var i = 1; i <= 194; i++) {
 		fetch(URL+"/"+ i)
 		.then(respuesta => respuesta.json())

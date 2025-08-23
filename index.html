@@ -25,19 +25,19 @@
 		margin-bottom: 20px;
 	}
 	img {
-		height: 150px;
-		width: 200px;
+		width: 100%;
 	}
 	.container {
 		display: flex;
 		flex-wrap: wrap;
-		gap: 15px;
-		justify-content: center;
+		gap: 10px;
+		justify-content: space-evenly;
 	}
 	.container div {
 		border: 2px solid;
 		flex: 0 0 calc(16.66% - 15px); 
 		max-width: calc(16.66% - 15px);
+		min-width: 200px;
 		padding: 10px;
 		box-sizing: border-box;
 		transition: transform 0.3s ease, box-shadow 0.3s ease;

@@ -4,41 +4,73 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>practica1</title>
-    <link rel="stylesheet" href="Estilos.css">
-	<script src="scrip.js" defer></script>
-	
-</head>
+</head>	
 <style type="text/css">
-	.container div {
-		border: 2px solid;
+	body {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+		background-color: #a0abdd;
+		font-family: Arial, sans-serif;
+	}
+	h1 {
+		width: 100%;
+		text-align: center;
+		color: navy;
+		font-family: 'Georgia', 'Times New Roman', serif;
+	    font-style: italic;
+		font-size: 2.5rem;        
+		letter-spacing: 2px;   
+		text-shadow: 2px 2px 6px rgba(0, 0, 0, 0.2);
+		margin-bottom: 20px;
 	}
 	img {
 		height: 150px;
 		width: 200px;
 	}
+	.container {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 15px;
+		justify-content: center;
+	}
+	.container div {
+		border: 2px solid;
+		flex: 0 0 calc(16.66% - 15px); 
+		max-width: calc(16.66% - 15px);
+		padding: 10px;
+		box-sizing: border-box;
+		transition: transform 0.3s ease, box-shadow 0.3s ease;
+		background-color: lightblue;
+		border-radius: 15px;
+	}
+	.container div:hover {
+		transform: scale(1.05);
+		box-shadow: 0 0 20px rgba(0, 176, 240, 0.7);
+	}
 </style>
 <body>
 	<h1>PRODUCTOS 2025 - PROGRAMACION WEB III</h1>
+
 	<div class="container" id="lista">
 	</div>
 
-
-	<script type="text/javascript">
-		const lista = document.querySelector("#lista");
-		let URL = "https://dummyjson.com/products";
-
-		for (var i = 1; i <= 194; i++) {
-			fetch(URL+"/"+ i)
-			.then(respuesta => respuesta.json())
-			.then(datos => mostrarDatos(datos))
-			.catch(err => console.error(err));
-		}
-		
-		function mostrarDatos(datos){
-			const div = document.createElement("div");
-			div.innerHTML=`<h3>${datos.title}</h3><p><b>Categoria: </b>${datos.category}</p><p><b>Precio: </b>${datos.price}</p><img src=${datos.images[0]}>`;
-			lista.appendChild(div);
-		}
-	</script>
 </body>
+<script type="text/javascript">
+	const lista = document.querySelector("#lista");
+	let URL = "https://dummyjson.com/products";
+
+	for (var i = 1; i <= 194; i++) {
+		fetch(URL+"/"+ i)
+		.then(respuesta => respuesta.json())
+		.then(datos => mostrarDatos(datos))
+		.catch(err => console.error(err));
+	}
+	
+	function mostrarDatos(datos){
+		const div = document.createElement("div");
+		div.innerHTML=`<h3>${datos.title}</h3><p><b>Categoria: </b>${datos.category}</p><p><b>Precio: </b>${datos.price}</p><img src=${datos.images[0]}>`;
+		lista.appendChild(div);
+	}
+</script>
 </html>

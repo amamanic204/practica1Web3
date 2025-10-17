@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>practica api</title>
+</head>
+<style>
+	* {
+		margin: 0;
+		padding: 0;
+		box-sizing: border-box;
+	}
+	body {
+		background-color: salmon;
+	}
+	.container {
+		width: 60%;
+		margin: auto;
+		margin-top: 20px;
+		margin-bottom: 20px;
+		padding: 20px;
+		background-color: whitesmoke;
+		box-shadow: 10px 10px 10px black;
+	}
+</style>
+<body>
+	<div class="container">
+		<div class="busqueda">
+			<button id="boton">Todos</button>
+			<label>Nombre: </label>
+			<select id="selectNombre">
+				<option value="">ninguno</option>
+			</select>
+			<label>Nivel: </label>
+			<select id="selectNivel">
+				<option value="">ninguno</option>
+			</select>
+		</div>
+		<div id="salida">
+		</div>
+	</div>
+</body>
+<script>
+	const salida = document.getElementById('salida');
+
+	function mostrarEnTabla(digimones) {
+		salida.innerHTML = "";
+		const tabla = document.createElement('table');
+		tabla.innerHTML = `<tr><th>NOMBRE</th><th>NIVEL</th></tr>`;
+		digimones.forEach((d) => {
+			const fila = document.createElement('tr');
+			fila.innerHTML = `<td>${d.name}</td><td>${d.level}</td>`;
+			tabla.appendChild(fila);
+		});
+		salida.appendChild(tabla);
+	} 
+
+	function buscar(cadena) {
+		fetch('https://digimon-api.vercel.app/api/digimon/'+cadena)
+			.then((x) => x.json())
+			.then((x) => {
+				mostrarEnTabla(x);
+			});
+	}
+
+	function crearBarraBusqueda(){
+		const selectNom = document.getElementById('selectNombre');
+		const selectNiv = document.getElementById('selectNivel');
+		const niveles = [];
+		fetch('https://digimon-api.vercel.app/api/digimon')
+			.then((x) => x.json())
+			.then((x) => {
+				x.forEach((d) => {
+					const opcion = document.createElement('option');
+					opcion.value = d.name;
+					opcion.innerHTML = d.name;
+					selectNom.appendChild(opcion);
+
+					if (!niveles.includes(d.level)) {
+						niveles.push(d.level);
+					}
+				});
+				niveles.forEach((nivel) => {
+					const opcion = document.createElement('option');
+					opcion.value = nivel;
+					opcion.innerHTML = nivel;
+					selectNiv.appendChild(opcion);
+				});
+			});
+	}
+
+	function adicionarEventos() {
+		const botonTodos = document.getElementById('boton');
+		const selectNom  = document.getElementById('selectNombre');
+		const selectNiv  = document.getElementById('selectNivel');
+
+		botonTodos.addEventListener("click", function () {
+			buscar('');
+			selectNom.value = '';
+			selectNiv.value = '';
+		});
+
+		selectNom.addEventListener("change", function () {
+			buscar('name/'+selectNom.value);
+			selectNiv.value = '';
+		});
+
+		selectNiv.addEventListener("click", function () {
+			buscar('level/'+selectNiv.value);
+			selectNom.value = '';
+		});
+	}
+	
+	function main() {
+		crearBarraBusqueda();
+		adicionarEventos();
+		buscar('');
+	}
+	main();
+</script>
+</html>
